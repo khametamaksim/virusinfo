@@ -1,4 +1,23 @@
 <resources>
     <string name="app_name">VirusInfo</string>
     <string name="VirusInfo" />
+    <string name="statistics">Statistics</string>
+    <string name="calculation">Calculation</string>
+    <string name="prevention">Prevention</string>
+    <string name="alert">Alert</string>
+    <string name="activity_statistics">Statistics</string>
+    <string name="covidrisk">Covid 19 Incidence Risk Calculation</string>
+    <string name="thisis">This is only an approximate calculation, do not seriously count on it </string>
+    <string name="location">Click to define location</string>
+    <string name="weather">Click to define weather</string>
+    <string name="peoplecount">Am. of people you have met</string>
+    <string name="mask">Do you use a mask?</string>
+    <string name="calculate">Calculate</string>
+    <string name="temp">Your temperature in \u2103</string>
+    <string-array name="feels">
+        <item>I feel good</item>
+        <item>Feel headache</item>
+        <item>Feel tired</item>
+        <item>Feel a cold</item>
+    </string-array>
 </resources>
