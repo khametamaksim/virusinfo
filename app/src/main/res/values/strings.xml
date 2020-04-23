@@ -14,6 +14,22 @@
     <string name="mask">Do you use a mask?</string>
     <string name="calculate">Calculate</string>
     <string name="temp">Your temperature in \u2103</string>
+    <string name="firstof">Are you staying at home without going outside for no reason?</string>
+    <string name="wmask">Do you keep safe distance from people on street?</string>
+    <string name="cover">Are you cover your mouth and nose on street?</string>
+    <string name="whands">Do you wash your hands and face when you return home?</string>
+    <string name="wetclean">Do you ventilate your house and do wet cleaning?</string>
+    <string name="toprevent">To prevent the possibility</string>
+    <string name="toprevent1">of a virus infection, follow</string>
+    <string name="toprevent2">the requirements below</string>
+    <string name="protect">\nWithout going out, you protect yourself and others from the disease.\n</string>
+    <string name="pickup">\nIn order not to pick up the virus from other people, keep a safe distance 1–1.5 meters.\n</string>
+    <string name="chance">\nWhen you cover nose and mouth, the chance of the virus getting into your body or passing it to someone else decreases.\n</string>
+    <string name="after">\nAfter being outside, bacteria may remain on your body, be sure to wash your face and hands.\n</string>
+    <string name="airing">\nAfter airing and cleaning, you will surely save your room from harmful bacteria.\n</string>
+    <string name="right">\nYou are doing everything right! Be healthy!\n</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string-array name="feels">
         <item>I feel good</item>
         <item>Feel headache</item>

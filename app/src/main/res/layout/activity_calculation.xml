@@ -59,7 +59,7 @@
                 android:id="@+id/button4"
                 android:layout_width="310dp"
                 android:layout_height="48dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/roundedbutton"
                 android:backgroundTint="#FF6647"
                 android:fontFamily="@font/gilroys"

@@ -17,6 +17,7 @@
         android:clickable="true"
         android:focusable="true"
         android:fontFamily="@font/gilroys"
+        android:onClick="Prevention"
         android:paddingStart="40dp"
         android:paddingTop="10dp"
         android:paddingEnd="40dp"

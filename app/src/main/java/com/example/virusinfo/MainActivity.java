@@ -28,4 +28,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, CalculationActivity.class);
         startActivity(intent);
     }
+
+    public void Prevention(View view) {
+
+        Intent intent = new Intent(this, PreventionActivity.class);
+        startActivity(intent);
+    }
 }
