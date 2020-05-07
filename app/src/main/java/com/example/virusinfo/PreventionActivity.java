@@ -29,6 +29,7 @@ public class PreventionActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getTheme().applyStyle(R.style.OverlayPrimaryColorRed, true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prevention);
 

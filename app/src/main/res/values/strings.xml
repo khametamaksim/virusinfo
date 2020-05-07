@@ -10,7 +10,7 @@
     <string name="thisis">This is only an approximate calculation, do not seriously count on it </string>
     <string name="location">Click to define location</string>
     <string name="weather">Click to define weather</string>
-    <string name="peoplecount">Am. of people you have met</string>
+    <string name="peoplecount">People you have met in 3 days</string>
     <string name="mask">Do you use a mask?</string>
     <string name="calculate">Calculate</string>
     <string name="temp">Your temperature in \u2103</string>
@@ -28,12 +28,32 @@
     <string name="after">\nAfter being outside, bacteria may remain on your body, be sure to wash your face and hands.\n</string>
     <string name="airing">\nAfter airing and cleaning, you will surely save your room from harmful bacteria.\n</string>
     <string name="right">\nYou are doing everything right! Be healthy!\n</string>
+    <string name="reduce">You need to reduce the number of contacts, stay home</string>
+    <string name="tempert">Keep track of your temperature, it is the main symptom of the disease</string>
+    <string name="illnes">Your well-being is like symptoms of an illness</string>
+    <string name="lookfor">Look for ways to deal with them</string>
+    <string name="recommend">Your temperature is above normal, we recommend you see a doctor</string>
+    <string name="load">Loading…</string>
+    <string name="defineloc">Define location</string>
+    <string name="definewea">Define weather</string>
+    <string name="defineppl">Enter amount of people</string>
+    <string name="definetem">Enter temperature</string>
+    <string name="define">Define a location</string>
+    <string name="entercurrent">Enter current temperature</string>
+    <string name="result">Your result of incidence risk</string>
+    <string name="okay">You are rather at safe zone</string>
+    <string name="norm">You may be at risk zone</string>
+    <string name="bad">You are at risk zone</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string-array name="feels">
         <item>I feel good</item>
+        <item>I have a cough</item>
         <item>Feel headache</item>
-        <item>Feel tired</item>
         <item>Feel a cold</item>
     </string-array>
+    <string name="ifeelg">I feel good</string>
+    <string name="ihavec">I have a cough</string>
+    <string name="feelh">Feel headache</string>
+    <string name="feelac">Feel a cold</string>
 </resources>
