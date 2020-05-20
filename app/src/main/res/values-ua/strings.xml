@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">VirusInfo</string>
+    <string name="VirusInfo" />
+    <string name="statistics">Статистика</string>
+    <string name="calculation">Калькулятор</string>
+    <string name="prevention">Профилактика</string>
+    <string name="alert">Alert</string>
+    <string name="activity_statistics">Statistics</string>
+    <string name="covidrisk">Расчет риска заболеваемости Covid 19</string>
+    <string name="thisis">Это только примерный расчет, не полагайся на него серьезно</string>
+    <string name="location">Определить местоположение</string>
+    <string name="weather">Определить погоду</string>
+    <string name="peoplecount">Кол-во контактов за 3 дня</string>
+    <string name="mask">Ты используешь маску?</string>
+    <string name="calculate">Посчитать</string>
+    <string name="temp">Твоя температура в \u2103</string>
+    <string name="firstof">Находишься ли ты дома и не выходишь на улицу без причины?</string>
+    <string name="wmask">Держишь ли дистанцию от людей, если выходишь?</string>
+    <string name="cover">Прикрываешь ли чем-нибудь рот и нос на улице?</string>
+    <string name="whands">Моешь ли ты свои руки и лицо по возращению домой?</string>
+    <string name="wetclean">Проветриваешь свое помещение и делаешь влажную уборку?</string>
+    <string name="toprevent">Для снижения вероятности</string>
+    <string name="toprevent1">заболевания инфекцией</string>
+    <string name="toprevent2">следуй правилам ниже</string>
+    <string name="protect">\nНе выходя на улицу без причины, ты сохраняешь здоровье себе и окружаюшим.\n</string>
+    <string name="pickup">\nЧтобы случайно не подхватить вирус от другого человека, сохраняй дистанцию 1–1.5 метра.\n</string>
+    <string name="chance">\nКогда ты прикрываешь нос и рот, шанс попадания вируса в твой организм снижается.\n</string>
+    <string name="after">\nПосле нахождения на улице, опасные бактерии могут остаться на твоем теле, вымой свои руки и лицо.\n</string>
+    <string name="airing">\nПосле проветривания и уборки, содержание бактерий в твоей комнате значительно уменьшается.\n</string>
+    <string name="right">\nТы делаешь все правильно, будь здоров!\n</string>
+    <string name="reduce">Тебе нужно сократить количество контактов</string>
+    <string name="tempert">Следи за своей температурой, она - главный симптом болезни</string>
+    <string name="illnes">Твое самочувствие похоже на симптомы болезни</string>
+    <string name="lookfor">Поищи способы борьбы с ними</string>
+    <string name="notfound">Ошибка:( Нужен интернет</string>
+    <string name="recommend">Твоя температура выше нормы, рекомендуем обратиться к врачу</string>
+    <string name="load">Загрузка…</string>
+    <string name="humidity">влажность: </string>
+    <string name="defineloc">Определи местоположение</string>
+    <string name="definewea">Определи погоду</string>
+    <string name="defineppl">Введи количество контактов</string>
+    <string name="definetem">Введи температуру</string>
+    <string name="define">Определи местоположение</string>
+    <string name="entercurrent">Введи правильную температуру</string>
+    <string name="result">Your result of incidence risk</string>
+    <string name="okay">Скорее всего, ты здоров</string>
+    <string name="norm">Ты можешь быть в зоне риска</string>
+    <string name="bad">Вероятно ты в зоне риска</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string-array name="feels">
+        <item>Самочуствие хорошее</item>
+        <item>У меня есть кашель</item>
+        <item>Болит голова</item>
+        <item>Чувствую простуженность</item>
+    </string-array>
+    <string name="ifeelg">Самочуствие хорошее</string>
+    <string name="ihavec">У меня есть кашель</string>
+    <string name="feelh">Болит голова</string>
+    <string name="feelac">Чувствую простуженность</string>
+</resources>

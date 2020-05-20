@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">VirusInfo</string>
+    <string name="VirusInfo" />
+    <string name="statistics">Statystyka</string>
+    <string name="calculation">Kalkulator</string>
+    <string name="prevention">Profilaktyka</string>
+    <string name="alert">Alert</string>
+    <string name="activity_statistics">Statistics</string>
+    <string name="covidrisk">Obliczanie ryzyka wystąpienia infekcji Covid 19</string>
+    <string name="thisis">Jest to przybliżone obliczenie, nie ufaj mu bezgranicznie</string>
+    <string name="location">Sprawdź lokalizację</string>
+    <string name="weather">Sprawdź pogodę</string>
+    <string name="peoplecount">Liczba kontaktów w 3 dni</string>
+    <string name="mask">Czy używasz maski?</string>
+    <string name="calculate">Policz</string>
+    <string name="temp">Twoja temperatura w \u2103</string>
+    <string name="firstof">Czy jesteś w domu i nie wychodzisz na zewnątrz bez powodu?</string>
+    <string name="wmask">Czy zachowujesz dystans od ludzi, jeśli wychodzisz?</string>
+    <string name="cover">Czy zasłaniasz czymś swoje usta i nos na ulicy?</string>
+    <string name="whands">Czy myjesz ręce i twarz po powrocie do domu?</string>
+    <string name="wetclean">Czy wentylujesz swój pokój i czyścisz na mokro?</string>
+    <string name="toprevent">Aby zmniejszyć możliwość</string>
+    <string name="toprevent1">zachorować na infekcję,</string>
+    <string name="toprevent2">postępuj tymi zasadami</string>
+    <string name="protect">\nBez wychodzenia na zewnątrz bez powodu utrzymujesz zdrowie dla siebie i innych.\n</string>
+    <string name="pickup">\nAby przypadkowo nie złapać wirusa od innej osoby, zachowaj dystans 1–1,5 metra.\n</string>
+    <string name="chance">\nKiedy pokrywasz nos i usta, zmniejsza się szansa, że wirus dostanie się twojego ciała.\n</string>
+    <string name="after">\nPo wyjściu na zewnątrz niebezpieczne bakterie mogą pozostać na ciele, umyj ręce i twarz.\n</string>
+    <string name="airing">\nPo wentylacji i czyszczeniu zawartość bakterii w pokoju znacznie się zmniejsza.\n</string>
+    <string name="right">\nRobisz wszystko dobrze, bądź zdrowy!\n</string>
+    <string name="reduce">Musisz zmniejszyć liczbę kontaktów</string>
+    <string name="tempert">Śliedź swoją temperaturę, jest to główny objaw choroby</string>
+    <string name="illnes">Twoje samopoczucie podobne do objaw choroby</string>
+    <string name="lookfor">Poszukaj sposobów walki z nimi</string>
+    <string name="notfound">Błąd :( Sprawdź internet</string>
+    <string name="recommend">Twoja temperatura jest bardzo wysoka, zalecamy skonsultować się z lekarzem</string>
+    <string name="load">Ładowanie…</string>
+    <string name="humidity">wilgotność: </string>
+    <string name="defineloc">Sprawdź lokalizację</string>
+    <string name="definewea">Sprawdż pogodę</string>
+    <string name="defineppl">Wprowadź liczbę kontaktów</string>
+    <string name="definetem">Wprowadź temperaturę</string>
+    <string name="define">Sprawdź lokalizację</string>
+    <string name="entercurrent">Ustaw właściwą temperaturę</string>
+    <string name="result">Your result of incidence risk</string>
+    <string name="okay">Podobno jesteś zdrowy</string>
+    <string name="norm">Możesz być w strefie ryzyku</string>
+    <string name="bad">Podobno jesteś zagrożony</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+    <string-array name="feels">
+        <item>Czuję się dobrze</item>
+        <item>Mam kaszel</item>
+        <item>Boli mnie głowa</item>
+        <item>Jestem przeziebiony</item>
+    </string-array>
+    <string name="ifeelg">Czuję się dobrze</string>
+    <string name="ihavec">Mam kaszel</string>
+    <string name="feelh">Boli mnie głowa</string>
+    <string name="feelac">Jestem przeziebiony</string>
+</resources>

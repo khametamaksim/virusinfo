@@ -10,7 +10,7 @@
     <string name="thisis">This is only an approximate calculation, do not seriously count on it </string>
     <string name="location">Click to define location</string>
     <string name="weather">Click to define weather</string>
-    <string name="peoplecount">People you have met in 3 days</string>
+    <string name="peoplecount">Amount of contacts in 3 days</string>
     <string name="mask">Do you use a mask?</string>
     <string name="calculate">Calculate</string>
     <string name="temp">Your temperature in \u2103</string>
@@ -34,6 +34,8 @@
     <string name="lookfor">Look for ways to deal with them</string>
     <string name="recommend">Your temperature is above normal, we recommend you see a doctor</string>
     <string name="load">Loading…</string>
+    <string name="humidity">humidity: </string>
+    <string name="notfound">Not found :( Check internet</string>
     <string name="defineloc">Define location</string>
     <string name="definewea">Define weather</string>
     <string name="defineppl">Enter amount of people</string>

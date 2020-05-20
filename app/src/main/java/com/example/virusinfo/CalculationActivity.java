@@ -69,11 +69,11 @@ public class CalculationActivity extends AppCompatActivity {
 
         Intent intent;
 
-        if (button4.getText().equals(getString(R.string.location)) || button4.getText().equals("Not found :( Check internet")) {
+        if (button4.getText().equals(getString(R.string.location)) || button4.getText().equals(getString(R.string.notfound))) {
             Toast toast = Toast.makeText(getApplicationContext(), R.string.defineloc, Toast.LENGTH_SHORT);
                     toast.show();
         }
-        else if (button5.getText().equals(getString(R.string.weather)) || button4.getText().equals("Not found :( Check internet")) {
+        else if (button5.getText().equals(getString(R.string.weather)) || button4.getText().equals(getString(R.string.notfound))) {
             Toast toast = Toast.makeText(getApplicationContext(), R.string.definewea, Toast.LENGTH_SHORT);
             toast.show();
         }
@@ -419,10 +419,10 @@ public class CalculationActivity extends AppCompatActivity {
                     country = "UK";
                 if (country.equals("Country: Korea, Republic of"))
                     country = "S. Korea";
-                location = city + ", " + country;
                 city_id = city + "," + getCode(country);
+                location = city + ", " + country;
             } else
-                location = "Not found :( Check internet";
+                location = getString(R.string.notfound);
 
             return null;
         }
@@ -550,7 +550,7 @@ public class CalculationActivity extends AppCompatActivity {
                     if (tempMin.equals(tempMax))
                         temp = tempMin;
                     else temp = (tempMin + "-" + tempMax);
-                    String humidity = "humidity: " + main.getString("humidity") + "%";
+                    String humidity = getString(R.string.humidity) + " " + main.getString("humidity") + "%";
                     hum = Integer.parseInt(main.getString("humidity"));
 
                     String weatherDescription = weather.getString("description");
@@ -563,7 +563,10 @@ public class CalculationActivity extends AppCompatActivity {
             }
 
             else
-                button5.setText("Not found :( Check internet");
+                if (city_id == null)
+                    button5.setText(R.string.define);
+                else
+                    button5.setText(getString(R.string.notfound));
         }
     }
 
@@ -580,7 +583,7 @@ public class CalculationActivity extends AppCompatActivity {
 
                 if (per < 1.5)
                     k = k + 2;
-                else if (per <= 3.5)
+                else if (per <= 3)
                     k = k + 5;
                 else if (per <= 6)
                     k = k + 9;
@@ -622,8 +625,10 @@ public class CalculationActivity extends AppCompatActivity {
                     k = k * 1.1;
                 else if (ppl <= 15)
                     k = k * 1.55;
-                else
+                else if (ppl <= 21)
                     k = k * 2.1;
+                else
+                    k = k * 3;
 
                 if (k >= 10) {
                     message = getString(R.string.reduce);
@@ -636,7 +641,7 @@ public class CalculationActivity extends AppCompatActivity {
 
                 if (per < 1.5)
                     k = k + 2;
-                else if (per <= 3.5)
+                else if (per <= 3)
                     k = k + 5;
                 else if (per <= 6)
                     k = k + 9;
@@ -678,8 +683,10 @@ public class CalculationActivity extends AppCompatActivity {
                     k = k * 1.1;
                 else if (ppl <= 15)
                     k = k * 1.55;
-                else
+                else if (ppl <= 21)
                     k = k * 2.1;
+                else
+                    k = k * 3;
 
                 if (k >= 10) {
                     message = "" + getString(R.string.reduce) + ". " + getString(R.string.tempert);
@@ -692,7 +699,7 @@ public class CalculationActivity extends AppCompatActivity {
 
                 if (per < 1.5)
                     k = k + 2;
-                else if (per <= 3.5)
+                else if (per <= 3)
                     k = k + 5;
                 else if (per <= 6)
                     k = k + 9;
@@ -734,8 +741,10 @@ public class CalculationActivity extends AppCompatActivity {
                     k = k * 1.1;
                 else if (ppl <= 15)
                     k = k * 1.55;
-                else
+                else if (ppl <= 21)
                     k = k * 2.1;
+                else
+                    k = k * 3;
 
                 if (k >= 10) {
                     message = "" + getString(R.string.reduce) + ". " + getString(R.string.tempert);
@@ -754,7 +763,7 @@ public class CalculationActivity extends AppCompatActivity {
 
                 if (per < 1.5)
                     k = k + 2;
-                else if (per <= 3.5)
+                else if (per <= 3)
                     k = k + 5;
                 else if (per <= 6)
                     k = k + 9;
@@ -794,8 +803,10 @@ public class CalculationActivity extends AppCompatActivity {
                     k = k * 1.1;
                 else if (ppl <= 15)
                     k = k * 1.55;
-                else
+                else if (ppl <= 21)
                     k = k * 2.1;
+                else
+                    k = k * 3;
 
                 if (k >= 10) {
                     message = "" + getString(R.string.illnes) + ". " + getString(R.string.lookfor);
@@ -808,7 +819,7 @@ public class CalculationActivity extends AppCompatActivity {
 
                 if (per < 1.5)
                     k = k + 2;
-                else if (per <= 3.5)
+                else if (per <= 3)
                     k = k + 5;
                 else if (per <= 6)
                     k = k + 9;
@@ -848,8 +859,10 @@ public class CalculationActivity extends AppCompatActivity {
                     k = k * 1.1;
                 else if (ppl <= 15)
                     k = k * 1.55;
-                else
+                else if (ppl <= 21)
                     k = k * 2.1;
+                else
+                    k = k * 3;
 
                 if (k >= 10) {
                     message = "" + getString(R.string.illnes) + ". " + getString(R.string.lookfor);
@@ -862,7 +875,7 @@ public class CalculationActivity extends AppCompatActivity {
 
                 if (per < 1.5)
                     k = k + 2;
-                else if (per <= 3.5)
+                else if (per <= 3)
                     k = k + 5;
                 else if (per <= 6)
                     k = k + 9;
@@ -902,8 +915,10 @@ public class CalculationActivity extends AppCompatActivity {
                     k = k * 1.1;
                 else if (ppl <= 15)
                     k = k * 1.55;
-                else
+                else if (ppl <= 21)
                     k = k * 2.1;
+                else
+                    k = k * 3;
 
                 if (k >= 10 && k < 20) {
                     message = "" + getString(R.string.illnes) + ". " + getString(R.string.lookfor);
