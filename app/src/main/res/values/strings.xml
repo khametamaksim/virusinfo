@@ -58,4 +58,16 @@
     <string name="ihavec">I have a cough</string>
     <string name="feelh">Feel headache</string>
     <string name="feelac">Feel a cold</string>
+    <string name="total_cases">Total cases</string>
+    <string name="cases_number"> </string>
+    <string name="total_recovered">Total recovered</string>
+    <string name="recovered_number"> </string>
+    <string name="total_deaths">Total deaths</string>
+    <string name="deaths_number"> </string>
+    <string name="view_by_country">View by\ncountry</string>
+    <string name="country">Country</string>
+    <string name="cases">Cases</string>
+    <string name="recovered">Recovered</string>
+    <string name="deaths">Deaths</string>
+    <string name="number"> </string>
 </resources>
