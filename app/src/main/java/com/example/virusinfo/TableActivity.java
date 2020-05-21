@@ -1,11 +1,13 @@
 package com.example.virusinfo;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,12 +31,55 @@ public class TableActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("ResourceAsColor")
     private void fillTable(int size, ArrayList<String> webData){
         TableLayout ll = (TableLayout) findViewById(R.id.tablelayout);
 
-        for(int i = 0; i < size; i += 7){
+        boolean check = true;
 
-            TableRow row= new TableRow(this);
+        for(int i = 0; i < size*7-7; i += 7){
+
+            int k = i;
+
+            if(i == 12*7 && check){
+
+                TableRow row = new TableRow(this);
+
+                TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+                row.setLayoutParams(lp);
+
+                TextView number = new TextView(this);
+                TextView country = new TextView(this);
+                TextView totalCases = new TextView(this);
+                TextView totalDeaths = new TextView(this);
+                TextView totalRecovered = new TextView(this);
+
+                country.setText(webData.get(webData.size() - 6));
+                country.setBackgroundColor(R.color.green);
+
+                String c = webData.get(webData.size() - 5) + '\n' + webData.get(webData.size() - 4);
+                totalCases.setText(c);
+                totalCases.setBackgroundColor(R.color.green);
+
+                String d = webData.get(webData.size() - 3) + '\n' + webData.get(webData.size() - 2);
+                totalDeaths.setText(d);
+                totalDeaths.setBackgroundColor(R.color.green);
+
+                totalRecovered.setText(webData.get(webData.size() - 1));
+                totalRecovered.setBackgroundColor(R.color.green);
+
+                row.addView(number);
+                row.addView(country);
+                row.addView(totalCases);
+                row.addView(totalDeaths);
+                row.addView(totalRecovered);
+
+                ll.addView(row);
+
+                check = false;
+            }
+
+            TableRow row = new TableRow(this);
 
             TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
             row.setLayoutParams(lp);
@@ -45,18 +90,22 @@ public class TableActivity extends AppCompatActivity {
             TextView totalDeaths = new TextView(this);
             TextView totalRecovered = new TextView(this);
 
-            int k = i;
-            number.setText(webData.get(k));
+            //number.setText(webData.get(k));
+            //number.setBackgroundColor(R.color.green);
 
             country.setText(webData.get(++k));
+            country.setBackgroundColor(R.color.green);
 
             String c = webData.get(++k) + '\n' + webData.get(++k);
             totalCases.setText(c);
+            totalCases.setBackgroundColor(R.color.green);
 
             String d = webData.get(++k) + '\n' + webData.get(++k);
             totalDeaths.setText(d);
+            totalDeaths.setBackgroundColor(R.color.green);
 
             totalRecovered.setText(webData.get(++k));
+            totalRecovered.setBackgroundColor(R.color.green);
 
             row.addView(number);
             row.addView(country);
@@ -68,10 +117,11 @@ public class TableActivity extends AppCompatActivity {
         }
     }
 
+
     class GetTable extends AsyncTask<Void, Void, Void> {
 
         Document doc = null;
-        private int size;
+        int size;
         ArrayList<String> webData = new ArrayList<>();
 
         @Override
@@ -82,18 +132,18 @@ public class TableActivity extends AppCompatActivity {
 
                 Element table = doc.select("table#main_table_countries_today").get(0);
                 table.select("tbody");
-                Elements rows = table.select("tr");
-                size = rows.size() - 5;
+                Elements rows = table.select("tr[style='']");
+                size = rows.size();
 
-                for (int i = 3; i < rows.size(); i++) {
+                for (int i = 0; i < rows.size(); i++) {
                     Element row = rows.get(i);
                     Elements cols = row.select("td");
 
                     for(int j = 0; j < 7; j++)
-                        webData.add(cols.get(i).text());
-                    if(i == 3)
-                        i+=2;
+                        webData.add(cols.get(j).text());
+
                 }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -106,6 +156,8 @@ public class TableActivity extends AppCompatActivity {
             super.onPostExecute(result);
 
             fillTable(size, webData);
+            //Toast toast = Toast.makeText(getApplicationContext(), String.valueOf(size), Toast.LENGTH_SHORT);
+            //toast.show();
         }
     }
 
