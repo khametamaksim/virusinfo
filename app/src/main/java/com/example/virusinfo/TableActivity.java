@@ -40,8 +40,10 @@ public class TableActivity extends AppCompatActivity {
         for(int i = 0; i < size*7-7; i += 7){
 
             int k = i;
+            int s1 = Integer.parseInt(webData.get(webData.size() - 5).replace(",", ""));
+            int s2 = Integer.parseInt(webData.get(k + 2).replace(",", ""));
 
-            if(i == 12*7 && check){
+            if((s1 > s2) && check){
 
                 TableRow row = new TableRow(this);
 
