@@ -1,4 +1,4 @@
-package com.example.virusinfo;
+package com.smapp.virusinfo;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -30,6 +30,7 @@ public class CalculationActivity extends AppCompatActivity {
     public Button button5;
     public String city_id = null;
     public String country = null;
+    String city;
     int hum;
     long cels;
     double per;
@@ -40,6 +41,7 @@ public class CalculationActivity extends AppCompatActivity {
     boolean mask;
     EditText temperature;
     Spinner feeling;
+    EditText age;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class CalculationActivity extends AppCompatActivity {
         button5 = (Button) findViewById(R.id.button5);
         people_count = (EditText) findViewById(R.id.editText2);
         temperature = (EditText) findViewById(R.id.editText);
+        age = (EditText) findViewById(R.id.editText4);
         temperature.addTextChangedListener(new PatternedTextWatcher("##.#"));
         feeling = findViewById(R.id.spinner);
 
@@ -75,6 +78,14 @@ public class CalculationActivity extends AppCompatActivity {
         }
         else if (button5.getText().equals(getString(R.string.weather)) || button4.getText().equals(getString(R.string.notfound))) {
             Toast toast = Toast.makeText(getApplicationContext(), R.string.definewea, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else if (age.getText().toString().equals("")) {
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.age, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else if (Double.parseDouble(age.getText().toString()) < 1 || Double.parseDouble(age.getText().toString()) > 118) {
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.entercurrentage, Toast.LENGTH_SHORT);
             toast.show();
         }
         else if (people_count.getText().toString().equals("")) {
@@ -381,7 +392,6 @@ public class CalculationActivity extends AppCompatActivity {
         public Void doInBackground(Void... voids) {
 
             String ip;
-            String city;
             Document doc = null;
 
             try {
@@ -407,9 +417,13 @@ public class CalculationActivity extends AppCompatActivity {
             */
 
             if (doc != null) {
-                ip = doc.getElementsByClass("form-control").val();
+                //ip = doc.getElementsByClass("form-control").val();
                 String str = doc.getElementsByClass("details").select("h3").text();
-                city = str.substring(str.indexOf("City:") + 6, str.indexOf("Country") - 1);
+                char [] strarr = str.toCharArray();
+                if ((strarr[7] == 'o') && (strarr[8] == 'u'))
+                    city = "";
+                else
+                    city = "" + str.substring(str.indexOf("City:") + 6, str.indexOf("Country") - 1);
                 country = str.substring(str.indexOf("Country:") + 9, str.indexOf("ISP") - 1);
                 if (country.equals("Russian Federation"))
                     country = "Russia";
@@ -419,8 +433,31 @@ public class CalculationActivity extends AppCompatActivity {
                     country = "UK";
                 if (country.equals("Country: Korea, Republic of"))
                     country = "S. Korea";
-                city_id = city + "," + getCode(country);
-                location = city + ", " + country;
+
+                if (!city.equals("")) {
+                    city_id = city + "," + getCode(country);
+                    location = city + ", " + country;
+                }
+                else {
+                    if (country.equals("Belarus")) {
+                        city = "Minsk";
+                        city_id = city + "," + getCode(country);
+                    }
+                    if (country.equals("Russia")) {
+                        city = "Moscow";
+                        city_id = city + "," + getCode(country);
+                    }
+                    if (country.equals("Poland")) {
+                        city = "Warsaw";
+                        city_id = city + "," + getCode(country);
+                    }
+                    if (country.equals("Ukraine")) {
+                        city = "Kyiv";
+                        city_id = city + "," + getCode(country);
+                    }
+                    location = country;
+                }
+
             } else
                 location = getString(R.string.notfound);
 
@@ -455,7 +492,7 @@ public class CalculationActivity extends AppCompatActivity {
             Document web = null;
 
             try {
-                web = Jsoup.connect("https://www.worldometers.info/coronavirus/#countries").get();
+                web = Jsoup.connect("https://www.worldometers.info/coronavirus/").get();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -476,20 +513,22 @@ public class CalculationActivity extends AppCompatActivity {
                 Element row = rows.get(index);
                 Elements cols = row.select("td");
 
-                s1 = cols.get(1).text();
+                s1 = cols.get(2).text();
                 s1 = s1.replace("," , "");
-                s2 = cols.get(5).text();
+                s2 = cols.get(6).text();
                 s2 = s2.replace("," , "");
-                per = Double.parseDouble(s1) / Double.parseDouble(s2);
+                if (!s2.equals("N/A"))
+                    per = Double.parseDouble(s1) / Double.parseDouble(s2);
+                else per = 1.25;
                 }
 
             else {
 
-                per = 3;
+                per = 2;
 
             }
 
-            return null; //11 czerwony
+            return null;
         }
 
         @Override
@@ -518,7 +557,9 @@ public class CalculationActivity extends AppCompatActivity {
                 return null;
             }
             else {
-                return HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?q=" + city_id + "&units=metric&appid=" + Api);
+                if (!city.equals(""))
+                    return HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?q=" + city_id + "&units=metric&appid=" + Api);
+                else return getString(R.string.notfoundsorry);
             }
         }
 
@@ -534,405 +575,482 @@ public class CalculationActivity extends AppCompatActivity {
         @Override
         public void onPostExecute(String result) {
 
-            if (result != null) {
+                if (result != null) {
 
-                try {
-                    JSONObject jsonObj = new JSONObject(result);
-                    JSONObject main = jsonObj.getJSONObject("main");
-                    JSONObject weather = jsonObj.getJSONArray("weather").getJSONObject(0);
+                    if (!city.equals("")) {
 
-                    long tempMi = Math.round(Double.parseDouble(main.getString("temp_min")));
-                    String tempMin = "" + tempMi + "°C";
-                    long tempMa = Math.round(Double.parseDouble(main.getString("temp_max")));
-                    String tempMax = "" + tempMa + "°C";
-                    cels = tempMi;
-                    String temp;
-                    if (tempMin.equals(tempMax))
-                        temp = tempMin;
-                    else temp = (tempMin + "-" + tempMax);
-                    String humidity = getString(R.string.humidity) + " " + main.getString("humidity") + "%";
-                    hum = Integer.parseInt(main.getString("humidity"));
+                        try {
+                            JSONObject jsonObj = new JSONObject(result);
+                            JSONObject main = jsonObj.getJSONObject("main");
+                            JSONObject weather = jsonObj.getJSONArray("weather").getJSONObject(0);
 
-                    String weatherDescription = weather.getString("description");
+                            long tempMi = Math.round(Double.parseDouble(main.getString("temp_min")));
+                            String tempMin = "" + tempMi + "°C";
+                            long tempMa = Math.round(Double.parseDouble(main.getString("temp_max")));
+                            String tempMax = "" + tempMa + "°C";
+                            cels = tempMi;
+                            String temp;
+                            if (tempMin.equals(tempMax))
+                                temp = tempMin;
+                            else temp = (tempMin + "-" + tempMax);
+                            String humidity = getString(R.string.humidity) + " " + main.getString("humidity") + "%";
+                            hum = Integer.parseInt(main.getString("humidity"));
 
-                    button5.setText(temp + ", " + humidity);// + ", " + weatherDescription);
+                            String weatherDescription = weather.getString("description");
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
+                            button5.setText(temp + ", " + humidity);// + ", " + weatherDescription);
 
-            else
-                if (city_id == null)
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else {
+                        button5.setText(result);
+                        cels = 20;
+                        hum = 50;
+                    }
+
+                } else if (city_id == null)
                     button5.setText(R.string.define);
                 else
                     button5.setText(getString(R.string.notfound));
+            }
         }
-    }
 
     public void testing () {
 
         double k = 0;
         int ppl = Integer.parseInt(people_count.getText().toString());
+        int year = Integer.parseInt(age.getText().toString());
         double tmp = Double.parseDouble(temperature.getText().toString());
         mask = ((CheckBox) findViewById(R.id.checkBox)).isChecked();
         selected = feeling.getSelectedItem().toString();
 
-        if (selected.equals(getString(R.string.ifeelg))) {
-            if (tmp <= 36.8) {
+        if (per > 1) {
+            if (selected.equals(getString(R.string.ifeelg))) {
+                if (tmp <= 36.8) {
 
-                if (per < 1.5)
-                    k = k + 2;
-                else if (per <= 3)
-                    k = k + 5;
-                else if (per <= 6)
-                    k = k + 9;
-                else if (per <= 9)
-                    k = k + 14;
-                else
-                    k = k + 20;
+                    if (per < 1.25)
+                        k = k + 2;
+                    else if (per <= 2)
+                        k = k + 5;
+                    else if (per <= 3)
+                        k = k + 9;
+                    else if (per <= 5)
+                        k = k + 14;
+                    else
+                        k = k + 20;
 
-                if (hum < 35 || hum > 65)
-                    k = k + 1;
-                else
-                    k = k + 0;
+                    if (hum < 35 || hum > 65)
+                        k = k + 1;
+                    else
+                        k = k + 0;
 
-                if (mask)
-                    k = k + 0.5;
-                else
-                    k = k + 1.5;
+                    if (mask)
+                        k = k + 0.5;
+                    else
+                        k = k + 1.5;
 
-                if (cels <= -15)
-                    k = k + 0;
-                else if (cels <= 0)
-                    k = k + 1;
-                else if (cels <= 22)
-                    k = k + 2;
-                else if (cels <= 37)
-                    k = k + 1;
-                else
-                    k = k + 0;
+                    if (cels <= -15)
+                        k = k + 0;
+                    else if (cels <= 0)
+                        k = k + 1;
+                    else if (cels <= 22)
+                        k = k + 2;
+                    else if (cels <= 37)
+                        k = k + 1;
+                    else
+                        k = k + 0;
 
-                if (ppl == 0)
-                    k = k * 0;
-                else if (ppl <= 2)
-                    k = k * 0.2;
-                else if (ppl <= 4)
-                    k = k * 0.45;
-                else if (ppl <= 6)
-                    k = k * 0.75;
-                else if (ppl <= 9)
-                    k = k * 1.1;
-                else if (ppl <= 15)
-                    k = k * 1.55;
-                else if (ppl <= 21)
-                    k = k * 2.1;
-                else
-                    k = k * 3;
+                    if (ppl == 0)
+                        k = k * 0;
+                    else if (ppl <= 2)
+                        k = k * 0.2;
+                    else if (ppl <= 4)
+                        k = k * 0.45;
+                    else if (ppl <= 6)
+                        k = k * 0.75;
+                    else if (ppl <= 9)
+                        k = k * 1.1;
+                    else if (ppl <= 15)
+                        k = k * 1.55;
+                    else if (ppl <= 21)
+                        k = k * 2.1;
+                    else
+                        k = k * 3;
 
-                if (k >= 10) {
-                    message = getString(R.string.reduce);
+                    if (year <= 12)
+                        k = k * 0.75;
+                    else if (year <= 18)
+                        k = k * 1;
+                    else if (year <= 30)
+                        k = k * 1.25;
+                    else if (year <= 60)
+                        k = k * 1.5;
+                    else if (year <= 90)
+                        k = k * 2;
+                    else k = k * 2.5;
+
+                    if (k >= 10) {
+                        message = getString(R.string.reduce);
+                    }
+
                 }
+                else if (tmp < 37.2) {
 
-            }
-            else if (tmp < 37.2) {
-
-                k = k + 2;
-
-                if (per < 1.5)
                     k = k + 2;
-                else if (per <= 3)
-                    k = k + 5;
-                else if (per <= 6)
-                    k = k + 9;
-                else if (per <= 9)
-                    k = k + 14;
-                else
-                    k = k + 20;
 
-                if (hum < 35 || hum > 65)
-                    k = k + 1;
-                else
-                    k = k + 0;
+                    if (per < 1.25)
+                        k = k + 2;
+                    else if (per <= 2)
+                        k = k + 5;
+                    else if (per <= 3)
+                        k = k + 9;
+                    else if (per <= 5)
+                        k = k + 14;
+                    else
+                        k = k + 20;
 
-                if (mask)
-                    k = k + 0.5;
-                else
-                    k = k + 1.5;
+                    if (hum < 35 || hum > 65)
+                        k = k + 1;
+                    else
+                        k = k + 0;
 
-                if (cels <= -15)
-                    k = k + 0;
-                else if (cels <= 0)
-                    k = k + 1;
-                else if (cels <= 22)
-                    k = k + 2;
-                else if (cels <= 37)
-                    k = k + 1;
-                else
-                    k = k + 0;
+                    if (mask)
+                        k = k + 0.5;
+                    else
+                        k = k + 1.5;
 
-                if (ppl == 0)
-                    k = k * 0;
-                else if (ppl <= 2)
-                    k = k * 0.2;
-                else if (ppl <= 4)
-                    k = k * 0.45;
-                else if (ppl <= 6)
-                    k = k * 0.75;
-                else if (ppl <= 9)
-                    k = k * 1.1;
-                else if (ppl <= 15)
-                    k = k * 1.55;
-                else if (ppl <= 21)
-                    k = k * 2.1;
-                else
-                    k = k * 3;
+                    if (cels <= -15)
+                        k = k + 0;
+                    else if (cels <= 0)
+                        k = k + 1;
+                    else if (cels <= 22)
+                        k = k + 2;
+                    else if (cels <= 37)
+                        k = k + 1;
+                    else
+                        k = k + 0;
 
-                if (k >= 10) {
-                    message = "" + getString(R.string.reduce) + ". " + getString(R.string.tempert);
+                    if (ppl == 0)
+                        k = k * 0;
+                    else if (ppl <= 2)
+                        k = k * 0.2;
+                    else if (ppl <= 4)
+                        k = k * 0.45;
+                    else if (ppl <= 6)
+                        k = k * 0.75;
+                    else if (ppl <= 9)
+                        k = k * 1.1;
+                    else if (ppl <= 15)
+                        k = k * 1.55;
+                    else if (ppl <= 21)
+                        k = k * 2.1;
+                    else
+                        k = k * 3;
+
+                    if (year <= 12)
+                        k = k * 0.75;
+                    else if (year <= 18)
+                        k = k * 1;
+                    else if (year <= 30)
+                        k = k * 1.25;
+                    else if (year <= 60)
+                        k = k * 1.5;
+                    else if (year <= 90)
+                        k = k * 2;
+                    else k = k * 2.5;
+
+                    if (k >= 10) {
+                        message = "" + getString(R.string.reduce) + ". " + getString(R.string.tempert);
+                    }
+
                 }
+                else {
 
-            }
-            else {
+                    k = k + 3;
 
-                k = k + 3;
+                    if (per < 1.25)
+                        k = k + 2;
+                    else if (per <= 2)
+                        k = k + 5;
+                    else if (per <= 3)
+                        k = k + 9;
+                    else if (per <= 5)
+                        k = k + 14;
+                    else
+                        k = k + 20;
 
-                if (per < 1.5)
-                    k = k + 2;
-                else if (per <= 3)
-                    k = k + 5;
-                else if (per <= 6)
-                    k = k + 9;
-                else if (per <= 9)
-                    k = k + 14;
-                else
-                    k = k + 20;
+                    if (hum < 35 || hum > 65)
+                        k = k + 1;
+                    else
+                        k = k + 0;
 
-                if (hum < 35 || hum > 65)
-                    k = k + 1;
-                else
-                    k = k + 0;
+                    if (mask)
+                        k = k + 0.5;
+                    else
+                        k = k + 1.5;
 
-                if (mask)
-                    k = k + 0.5;
-                else
-                    k = k + 1.5;
+                    if (cels <= -15)
+                        k = k + 0;
+                    else if (cels <= 0)
+                        k = k + 1;
+                    else if (cels <= 22)
+                        k = k + 2;
+                    else if (cels <= 37)
+                        k = k + 1;
+                    else
+                        k = k + 0;
 
-                if (cels <= -15)
-                    k = k + 0;
-                else if (cels <= 0)
-                    k = k + 1;
-                else if (cels <= 22)
-                    k = k + 2;
-                else if (cels <= 37)
-                    k = k + 1;
-                else
-                    k = k + 0;
+                    if (ppl == 0)
+                        k = k * 0;
+                    else if (ppl <= 2)
+                        k = k * 0.2;
+                    else if (ppl <= 4)
+                        k = k * 0.45;
+                    else if (ppl <= 6)
+                        k = k * 0.75;
+                    else if (ppl <= 9)
+                        k = k * 1.1;
+                    else if (ppl <= 15)
+                        k = k * 1.55;
+                    else if (ppl <= 21)
+                        k = k * 2.1;
+                    else
+                        k = k * 3;
 
-                if (ppl == 0)
-                    k = k * 0;
-                else if (ppl <= 2)
-                    k = k * 0.2;
-                else if (ppl <= 4)
-                    k = k * 0.45;
-                else if (ppl <= 6)
-                    k = k * 0.75;
-                else if (ppl <= 9)
-                    k = k * 1.1;
-                else if (ppl <= 15)
-                    k = k * 1.55;
-                else if (ppl <= 21)
-                    k = k * 2.1;
-                else
-                    k = k * 3;
+                    if (year <= 12)
+                        k = k * 0.75;
+                    else if (year <= 18)
+                        k = k * 1;
+                    else if (year <= 30)
+                        k = k * 1.25;
+                    else if (year <= 60)
+                        k = k * 1.5;
+                    else if (year <= 90)
+                        k = k * 2;
+                    else k = k * 2.5;
 
-                if (k >= 10) {
-                    message = "" + getString(R.string.reduce) + ". " + getString(R.string.tempert);
+                    if (k >= 10) {
+                        message = "" + getString(R.string.reduce) + ". " + getString(R.string.tempert);
+                    }
                 }
-            }
-            if (tmp > 37.4) {
-                k = 20;
-                message = getString(R.string.recommend);
-            }
-        }
-
-        else {
-            if (tmp <= 36.8) {
-
-                k = k + 20;
-
-                if (per < 1.5)
-                    k = k + 2;
-                else if (per <= 3)
-                    k = k + 5;
-                else if (per <= 6)
-                    k = k + 9;
-                else if (per <= 9)
-                    k = k + 14;
-                else
-                    k = k + 20;
-
-                if (hum < 35 || hum > 65)
-                    k = k + 1;
-                else
-                    k = k + 0;
-
-                if (mask)
-                    k = k + 0.5;
-                else
-                    k = k + 1.5;
-
-                if (cels <= -15)
-                    k = k + 0;
-                else if (cels <= 0)
-                    k = k + 1;
-                else if (cels <= 22)
-                    k = k + 2;
-                else if (cels <= 37)
-                    k = k + 1;
-                else
-                    k = k + 0;
-
-                if (ppl <= 2)
-                    k = k * 0.3;
-                else if (ppl <= 4)
-                    k = k * 0.45;
-                else if (ppl <= 6)
-                    k = k * 0.75;
-                else if (ppl <= 9)
-                    k = k * 1.1;
-                else if (ppl <= 15)
-                    k = k * 1.55;
-                else if (ppl <= 21)
-                    k = k * 2.1;
-                else
-                    k = k * 3;
-
-                if (k >= 10) {
-                    message = "" + getString(R.string.illnes) + ". " + getString(R.string.lookfor);
-                }
-
-            }
-            else if (tmp < 37.2) {
-
-                k = k + 30;
-
-                if (per < 1.5)
-                    k = k + 2;
-                else if (per <= 3)
-                    k = k + 5;
-                else if (per <= 6)
-                    k = k + 9;
-                else if (per <= 9)
-                    k = k + 14;
-                else
-                    k = k + 20;
-
-                if (hum < 35 || hum > 65)
-                    k = k + 1;
-                else
-                    k = k + 0;
-
-                if (mask)
-                    k = k + 0.5;
-                else
-                    k = k + 1.5;
-
-                if (cels <= -15)
-                    k = k + 0;
-                else if (cels <= 0)
-                    k = k + 1;
-                else if (cels <= 22)
-                    k = k + 2;
-                else if (cels <= 37)
-                    k = k + 1;
-                else
-                    k = k + 0;
-
-                if (ppl <= 2)
-                    k = k * 0.3;
-                else if (ppl <= 4)
-                    k = k * 0.45;
-                else if (ppl <= 6)
-                    k = k * 0.75;
-                else if (ppl <= 9)
-                    k = k * 1.1;
-                else if (ppl <= 15)
-                    k = k * 1.55;
-                else if (ppl <= 21)
-                    k = k * 2.1;
-                else
-                    k = k * 3;
-
-                if (k >= 10) {
-                    message = "" + getString(R.string.illnes) + ". " + getString(R.string.lookfor);
-                }
-
-            }
-            else {
-
-                k = k + 40;
-
-                if (per < 1.5)
-                    k = k + 2;
-                else if (per <= 3)
-                    k = k + 5;
-                else if (per <= 6)
-                    k = k + 9;
-                else if (per <= 9)
-                    k = k + 14;
-                else
-                    k = k + 20;
-
-                if (hum < 35 || hum > 65)
-                    k = k + 1;
-                else
-                    k = k + 0;
-
-                if (mask)
-                    k = k + 0.5;
-                else
-                    k = k + 1.5;
-
-                if (cels <= -15)
-                    k = k + 0;
-                else if (cels <= 0)
-                    k = k + 1;
-                else if (cels <= 22)
-                    k = k + 2;
-                else if (cels <= 37)
-                    k = k + 1;
-                else
-                    k = k + 0;
-
-                if (ppl <= 2)
-                    k = k * 0.3;
-                else if (ppl <= 4)
-                    k = k * 0.45;
-                else if (ppl <= 6)
-                    k = k * 0.75;
-                else if (ppl <= 9)
-                    k = k * 1.1;
-                else if (ppl <= 15)
-                    k = k * 1.55;
-                else if (ppl <= 21)
-                    k = k * 2.1;
-                else
-                    k = k * 3;
-
-                if (k >= 10 && k < 20) {
-                    message = "" + getString(R.string.illnes) + ". " + getString(R.string.lookfor);
-                }
-                else if (k >= 20) {
-                    message = "" + getString(R.string.illnes) + ". " + getString(R.string.recommend);
-                }
-
                 if (tmp > 37.4) {
                     k = 20;
-                    message = "" + getString(R.string.illnes) + ". " + getString(R.string.recommend);
+                    message = getString(R.string.recommend);
+                }
+            } else {
+                if (tmp <= 36.8) {
+
+                    k = k + 20;
+
+                    if (per < 1.25)
+                        k = k + 2;
+                    else if (per <= 2)
+                        k = k + 5;
+                    else if (per <= 3)
+                        k = k + 9;
+                    else if (per <= 5)
+                        k = k + 14;
+                    else
+                        k = k + 20;
+
+                    if (hum < 35 || hum > 65)
+                        k = k + 1;
+                    else
+                        k = k + 0;
+
+                    if (mask)
+                        k = k + 0.5;
+                    else
+                        k = k + 1.5;
+
+                    if (cels <= -15)
+                        k = k + 0;
+                    else if (cels <= 0)
+                        k = k + 1;
+                    else if (cels <= 22)
+                        k = k + 2;
+                    else if (cels <= 37)
+                        k = k + 1;
+                    else
+                        k = k + 0;
+
+                    if (ppl <= 2)
+                        k = k * 0.3;
+                    else if (ppl <= 4)
+                        k = k * 0.45;
+                    else if (ppl <= 6)
+                        k = k * 0.75;
+                    else if (ppl <= 9)
+                        k = k * 1.1;
+                    else if (ppl <= 15)
+                        k = k * 1.55;
+                    else if (ppl <= 21)
+                        k = k * 2.1;
+                    else
+                        k = k * 3;
+
+                    if (year <= 12)
+                        k = k * 0.75;
+                    else if (year <= 18)
+                        k = k * 1;
+                    else if (year <= 30)
+                        k = k * 1.25;
+                    else if (year <= 60)
+                        k = k * 1.5;
+                    else if (year <= 90)
+                        k = k * 2;
+                    else k = k * 2.5;
+
+                    if (k >= 10) {
+                        message = "" + getString(R.string.illnes) + ". " + getString(R.string.lookfor);
+                    }
+
+                } else if (tmp < 37.2) {
+
+                    k = k + 30;
+
+                    if (per < 1.25)
+                        k = k + 2;
+                    else if (per <= 2)
+                        k = k + 5;
+                    else if (per <= 3)
+                        k = k + 9;
+                    else if (per <= 5)
+                        k = k + 14;
+                    else
+                        k = k + 20;
+
+                    if (hum < 35 || hum > 65)
+                        k = k + 1;
+                    else
+                        k = k + 0;
+
+                    if (mask)
+                        k = k + 0.5;
+                    else
+                        k = k + 1.5;
+
+                    if (cels <= -15)
+                        k = k + 0;
+                    else if (cels <= 0)
+                        k = k + 1;
+                    else if (cels <= 22)
+                        k = k + 2;
+                    else if (cels <= 37)
+                        k = k + 1;
+                    else
+                        k = k + 0;
+
+                    if (ppl <= 2)
+                        k = k * 0.3;
+                    else if (ppl <= 4)
+                        k = k * 0.45;
+                    else if (ppl <= 6)
+                        k = k * 0.75;
+                    else if (ppl <= 9)
+                        k = k * 1.1;
+                    else if (ppl <= 15)
+                        k = k * 1.55;
+                    else if (ppl <= 21)
+                        k = k * 2.1;
+                    else
+                        k = k * 3;
+
+                    if (year <= 12)
+                        k = k * 0.75;
+                    else if (year <= 18)
+                        k = k * 1;
+                    else if (year <= 30)
+                        k = k * 1.25;
+                    else if (year <= 60)
+                        k = k * 1.5;
+                    else if (year <= 90)
+                        k = k * 2;
+                    else k = k * 2.5;
+
+                    if (k >= 10) {
+                        message = "" + getString(R.string.illnes) + ". " + getString(R.string.lookfor);
+                    }
+
+                } else {
+
+                    k = k + 40;
+
+                    if (per < 1.25)
+                        k = k + 2;
+                    else if (per <= 2)
+                        k = k + 5;
+                    else if (per <= 3)
+                        k = k + 9;
+                    else if (per <= 5)
+                        k = k + 14;
+                    else
+                        k = k + 20;
+
+                    if (hum < 35 || hum > 65)
+                        k = k + 1;
+                    else
+                        k = k + 0;
+
+                    if (mask)
+                        k = k + 0.5;
+                    else
+                        k = k + 1.5;
+
+                    if (cels <= -15)
+                        k = k + 0;
+                    else if (cels <= 0)
+                        k = k + 1;
+                    else if (cels <= 22)
+                        k = k + 2;
+                    else if (cels <= 37)
+                        k = k + 1;
+                    else
+                        k = k + 0;
+
+                    if (ppl <= 2)
+                        k = k * 0.3;
+                    else if (ppl <= 4)
+                        k = k * 0.45;
+                    else if (ppl <= 6)
+                        k = k * 0.75;
+                    else if (ppl <= 9)
+                        k = k * 1.1;
+                    else if (ppl <= 15)
+                        k = k * 1.55;
+                    else if (ppl <= 21)
+                        k = k * 2.1;
+                    else
+                        k = k * 3;
+
+                    if (year <= 12)
+                        k = k * 0.75;
+                    else if (year <= 18)
+                        k = k * 1;
+                    else if (year <= 30)
+                        k = k * 1.25;
+                    else if (year <= 60)
+                        k = k * 1.5;
+                    else if (year <= 90)
+                        k = k * 2;
+                    else k = k * 2.5;
+
+                    if (k >= 10 && k < 20) {
+                        message = "" + getString(R.string.illnes) + ". " + getString(R.string.lookfor);
+                    } else if (k >= 20) {
+                        message = "" + getString(R.string.illnes) + ". " + getString(R.string.recommend);
+                    }
+
+                    if (tmp > 37.4) {
+                        k = 20;
+                        message = "" + getString(R.string.illnes) + ". " + getString(R.string.recommend);
+                    }
                 }
             }
         }
+        else k = 0;
 
         res = k;
 

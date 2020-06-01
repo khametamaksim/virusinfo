@@ -58,4 +58,21 @@
     <string name="ihavec">У меня есть кашель</string>
     <string name="feelh">Болит голова</string>
     <string name="feelac">Чувствую простуженность</string>
+    <string name="age">Введи возраст</string>
+    <string name="entercurrentage">Введи правильный возраст</string>
+    <string name="total_cases">Всего случаев</string>
+    <string name="cases_number"> </string>
+    <string name="total_recovered">Выздоровевших</string>
+    <string name="recovered_number"> </string>
+    <string name="total_deaths">Всех погибших</string>
+    <string name="deaths_number"> </string>
+    <string name="view_by_country">Смотреть по\nстранам</string>
+    <string name="country">Страна</string>
+    <string name="cases">Случаев</string>
+    <string name="recovered">Здоровы</string>
+    <string name="deaths">Умерли</string>
+    <string name="number"> </string>
+    <string name="todo">TODO</string>
+    <string name="statisticsof">Статистика по Covid 19</string>
+    <string name="notfoundsorry">Город не найден</string>
 </resources>

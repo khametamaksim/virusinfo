@@ -20,7 +20,7 @@
     <string name="whands">Czy myjesz ręce i twarz po powrocie do domu?</string>
     <string name="wetclean">Czy wentylujesz swój pokój i czyścisz na mokro?</string>
     <string name="toprevent">Aby zmniejszyć możliwość</string>
-    <string name="toprevent1">zachorować na infekcję,</string>
+    <string name="toprevent1">zachorowania na infekcję,</string>
     <string name="toprevent2">postępuj tymi zasadami</string>
     <string name="protect">\nBez wychodzenia na zewnątrz bez powodu utrzymujesz zdrowie dla siebie i innych.\n</string>
     <string name="pickup">\nAby przypadkowo nie złapać wirusa od innej osoby, zachowaj dystans 1–1,5 metra.\n</string>
@@ -58,4 +58,21 @@
     <string name="ihavec">Mam kaszel</string>
     <string name="feelh">Boli mnie głowa</string>
     <string name="feelac">Jestem przeziebiony</string>
+    <string name="age">Wprowadź wiek</string>
+    <string name="entercurrentage">Wprowadź poprawny wiek</string>
+    <string name="total_cases">Liczba zachorowań</string>
+    <string name="cases_number"> </string>
+    <string name="total_recovered">Liczba ozdrowieńców</string>
+    <string name="recovered_number"> </string>
+    <string name="total_deaths">Liczba zgonów</string>
+    <string name="deaths_number"> </string>
+    <string name="view_by_country">Widok według\nkrajów</string>
+    <string name="country">Kraj</string>
+    <string name="cases">Przypadki</string>
+    <string name="recovered">Zdrowe</string>
+    <string name="deaths">Zmarli</string>
+    <string name="number"> </string>
+    <string name="todo">TODO</string>
+    <string name="statisticsof">Statystyka Covid 19</string>
+    <string name="notfoundsorry">Nie znaleziono miasta</string>
 </resources>

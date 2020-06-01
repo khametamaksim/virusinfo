@@ -1,4 +1,4 @@
-package com.example.virusinfo;
+package com.smapp.virusinfo;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -64,17 +64,20 @@ public class StatisticsActivity extends AppCompatActivity {
                 deathsEl = doc.getElementsByClass("maincounter-number"); //gets numbers of total cases, dead and recovered
                 totalDeaths = deathsEl.text().split(" ");
             }
-            else
-                totalDeaths[0] = "Error";
+            else {
+                totalDeaths[0] = getString(R.string.notfound);
+                totalDeaths[1] = getString(R.string.notfound);
+                totalDeaths[2] = getString(R.string.notfound);
+            }
 
             return null;
         }
 
         @Override
         public void onPreExecute(){
-            totalText.setText("Loading...");
-            deathsText.setText("Loading...");
-            recoveredText.setText("Loading...");
+            totalText.setText(R.string.load);
+            deathsText.setText(R.string.load);
+            recoveredText.setText(R.string.load);
         }
 
         @Override

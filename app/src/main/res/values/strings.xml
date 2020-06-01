@@ -67,7 +67,12 @@
     <string name="view_by_country">View by\ncountry</string>
     <string name="country">Country</string>
     <string name="cases">Cases</string>
-    <string name="recovered">Recovered</string>
+    <string name="recovered">Recov</string>
     <string name="deaths">Deaths</string>
     <string name="number"> </string>
+    <string name="todo">TODO</string>
+    <string name="statisticsof">Statistics of Covid 19</string>
+    <string name="notfoundsorry">Can\'t define a city</string>
+    <string name="age">Enter you age</string>
+    <string name="entercurrentage">Enter current age</string>
 </resources>

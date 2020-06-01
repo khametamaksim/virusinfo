@@ -60,7 +60,6 @@
         android:backgroundTint="#FFFFFF"
         android:clickable="true"
         android:focusable="true"
-        android:focusableInTouchMode="false"
         android:fontFamily="@font/gilroys"
         android:onClick="Statistics"
         android:paddingStart="25dp"

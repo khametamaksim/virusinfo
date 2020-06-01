@@ -8,7 +8,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,14 +24,14 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:paddingTop="32dp"
                 android:fontFamily="@font/gilroys"
-                android:paddingStart="100dp"
-                android:paddingEnd="100dp"
-                android:text="@string/statistics"
+                android:paddingStart="70dp"
+                android:paddingEnd="70dp"
+                android:text="@string/statisticsof"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="32sp"
+                android:textSize="34sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -37,11 +41,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroys"
-                android:padding="20sp"
+                android:paddingTop="35sp"
+                android:paddingBottom="15dp"
                 android:text="@string/total_cases"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="25sp" />
+                android:layout_marginTop="15dp"
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -51,19 +57,22 @@
                 android:padding="10sp"
                 android:text="@string/cases_number"
                 android:textAlignment="center"
-                android:textColor="#2196F3"
-                android:textSize="20sp" />
+                android:background="@color/yel"
+                android:textColor="@color/white"
+                android:textSize="25sp" >
+            </TextView>
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroys"
-                android:padding="20sp"
+                android:paddingTop="35sp"
+                android:paddingBottom="15dp"
                 android:text="@string/total_deaths"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="25sp" />
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -73,47 +82,57 @@
                 android:padding="10sp"
                 android:text="@string/deaths_number"
                 android:textAlignment="center"
-                android:textColor="#ff0000"
-                android:textSize="20sp" />
+                android:background="@color/red"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/textView8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroys"
-                android:padding="20sp"
+                android:paddingTop="35sp"
+                android:paddingBottom="15dp"
                 android:text="@string/total_recovered"
                 android:textAlignment="center"
                 android:textColor="#000000"
-                android:textSize="25sp" />
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroys"
-                android:paddingTop="10sp"
-                android:paddingBottom="75sp"
+                android:padding="10sp"
                 android:text="@string/recovered_number"
                 android:textAlignment="center"
-                android:textColor="#00FF00"
-                android:textSize="20sp" />
+                android:background="@color/greendark"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/button7"
-                android:layout_width="181dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:elevation="2dp"
+                android:background="@drawable/button_selector"
+                android:backgroundTint="#ffffff"
+                android:elevation="3dp"
+                android:translationY="9dp"
+                android:translationZ="9dp"
                 android:fontFamily="@font/gilroys"
-                android:keepScreenOn="false"
                 android:onClick="countriesTable"
-                android:padding="10sp"
+                android:stateListAnimator="@null"
+                android:padding="15dp"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:textAllCaps="false"
                 android:text="@string/view_by_country"
                 android:textAlignment="center"
-                android:textAllCaps="true"
                 android:textColor="#000000"
-                android:textSize="20sp" />
+                android:textSize="18sp"
+                android:layout_marginTop="45dp"
+                android:layout_marginBottom="55dp"/>
+
         </LinearLayout>
     </ScrollView>
 

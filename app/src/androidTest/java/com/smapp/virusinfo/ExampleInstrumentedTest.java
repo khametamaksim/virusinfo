@@ -1,4 +1,4 @@
-package com.example.virusinfo;
+package com.smapp.virusinfo;
 
 import android.content.Context;
 
