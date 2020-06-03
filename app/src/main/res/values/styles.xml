@@ -37,4 +37,35 @@
         <item name="colorAccent">#fff</item>
     </style>
 
+    <style name="textrow">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/gilroys</item>
+        <item name="android:textSize">16sp</item>
+        <item name="height">125dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+    <style name="textrowblack">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/gilroys</item>
+        <item name="android:textSize">16sp</item>
+        <item name="height">125dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+
+    </style>
+
+    <declare-styleable name="DonutProgress">
+        <attr name="donut_progress" format="integer"/>
+        <attr name="donut_max" format="integer"/>
+        <attr name="donut_unfinished_color" format="color"/>
+        <attr name="donut_finished_color" format="color"/>
+        <attr name="donut_finished_stroke_width" format="dimension"/>
+        <attr name="donut_unfinished_stroke_width" format="dimension"/>
+        <attr name="donut_text_size" format="dimension"/>
+        <attr name="donut_text_color" format="color"/>
+        <attr name="donut_text" format="string"/>
+        <attr name="donut_prefix_text" format="string"/>
+        <attr name="donut_suffix_text" format="string"/>
+        <attr name="donut_background_color" format="color"/>
+    </declare-styleable>
+
 </resources>

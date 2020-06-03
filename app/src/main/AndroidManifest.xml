@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.virusinfo">
+    package="com.smapp.virusinfo">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,13 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+
         >
-        <activity android:name=".TableActivity" />
-        <activity android:name=".ResultActivity"></activity>
-        <activity android:name=".PreventionActivity" />
-        <activity android:name=".CalculationActivity" />
-        <activity android:name=".StatisticsActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.smapp.virusinfo.TableActivity" />
+        <activity android:name="com.smapp.virusinfo.ResultActivity" />
+        <activity android:name="com.smapp.virusinfo.PreventionActivity" />
+        <activity android:name="com.smapp.virusinfo.CalculationActivity" />
+        <activity android:name="com.smapp.virusinfo.StatisticsActivity" />
+        <activity android:name="com.smapp.virusinfo.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
