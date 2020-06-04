@@ -91,6 +91,32 @@ public class StatisticsActivityTest {
 
         gn.doInBackground();
 
-        assertEquals("6,567,260", gn.totalDeaths[0]);
+        assertEquals("6,591,124", gn.totalDeaths[0]);
+    }
+
+    @Test
+    public void totalDeathsTest(){
+        StatisticsActivity s = new StatisticsActivity();
+        assertNotNull(s);
+
+        StatisticsActivity.GetNumber gn = s.new GetNumber();
+        assertNotNull(gn);
+
+        gn.doInBackground();
+
+        assertEquals("388,353", gn.totalDeaths[1]);
+    }
+
+    @Test
+    public void totalRecoveredTest(){
+        StatisticsActivity s = new StatisticsActivity();
+        assertNotNull(s);
+
+        StatisticsActivity.GetNumber gn = s.new GetNumber();
+        assertNotNull(gn);
+
+        gn.doInBackground();
+
+        assertEquals("3,183,578", gn.totalDeaths[2]);
     }
 }
